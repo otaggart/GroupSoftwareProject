@@ -43,7 +43,7 @@ def index(request):
         entry, created = LeaderboardEntry.objects.get_or_create(
             user=request.user,
             game=GAME_NAME,
-            defaults={'score': final_score, 'date': time4zone.now()}
+            defaults={'score': final_score, 'date': timezone.now()}
         )
         if not created and final_score > entry.score:
             entry.score = final_score
