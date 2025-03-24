@@ -8,6 +8,18 @@
     padding: 0 20px;
 }
 
+.navbar-logo {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo img {
+    height: 40px; /* Adjust the logo size */
+    width: auto;
+    cursor: pointer;
+}
+
+
 .navbar-links {
     display: flex;
     gap: 10px; 
