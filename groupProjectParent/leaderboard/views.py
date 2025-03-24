@@ -12,26 +12,27 @@ import json
 
 
 @login_required(login_url='my-login')
-@csrf_exempt  # Be cautious in production, consider alternative CSRF protection
+@csrf_exempt
+@require_POST
+@login_required(login_url='my-login')
+@csrf_exempt
 @require_POST
 def submit_unity_score(request):
     try:
-        # For WebGL, you might receive form data or JSON
         score = request.POST.get('score') or json.loads(request.body).get('score')
-        game_name = request.POST.get('game_name') or json.loads(request.body).get('game_name', 'Unity Game')
 
         # Create or update leaderboard entry
         entry, created = LeaderboardEntry.objects.get_or_create(
             user=request.user,
-            game=game_name,
+            game="Cycling",
             defaults={
-                'score': int(score),
+                'score': int(score) * 6,
                 'date': timezone.now()
             }
         )
 
         # Update score if new score is higher
-        if not created and int(score) > entry.score:
+        if not created and (int(score) * 6) > entry.score:
             entry.score = int(score)
             entry.date = timezone.now()
             entry.save()
@@ -50,7 +51,7 @@ def submit_unity_score(request):
 @login_required(login_url='my-login')
 def leaderboard_view(request):
     update_badges()
-    games = ["Energy Conservation", "Recycling", "Cycling", "Quiz", "Bike Game"]
+    games = ["Energy Conservation", "Recycling", "Cycling", "Quiz"]
     
     leaderboard_data = []
     
