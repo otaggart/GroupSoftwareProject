@@ -20,19 +20,19 @@ import json
 def submit_unity_score(request):
     try:
         score = request.POST.get('score') or json.loads(request.body).get('score')
-
+        score = int(score) * 10
         # Create or update leaderboard entry
         entry, created = LeaderboardEntry.objects.get_or_create(
             user=request.user,
             game="Cycling",
             defaults={
-                'score': int(score) * 6,
+                'score': int(score),
                 'date': timezone.now()
             }
         )
 
         # Update score if new score is higher
-        if not created and (int(score) * 6) > entry.score:
+        if not created and int(score)> entry.score:
             entry.score = int(score)
             entry.date = timezone.now()
             entry.save()
