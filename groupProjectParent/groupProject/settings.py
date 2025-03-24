@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'quizes',
     'UserProfile.apps.UserprofileConfig',
     'Recycle',
+    'websites',
 ]
 
 MIDDLEWARE = [
