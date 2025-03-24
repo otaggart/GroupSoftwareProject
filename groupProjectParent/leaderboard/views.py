@@ -4,11 +4,53 @@ from django.db.models import Max
 from .models import LeaderboardEntry
 from .utils import update_badges
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from django.utils import timezone
+import json
+
+
+@login_required(login_url='my-login')
+@csrf_exempt  # Be cautious in production, consider alternative CSRF protection
+@require_POST
+def submit_unity_score(request):
+    try:
+        # For WebGL, you might receive form data or JSON
+        score = request.POST.get('score') or json.loads(request.body).get('score')
+        game_name = request.POST.get('game_name') or json.loads(request.body).get('game_name', 'Unity Game')
+
+        # Create or update leaderboard entry
+        entry, created = LeaderboardEntry.objects.get_or_create(
+            user=request.user,
+            game=game_name,
+            defaults={
+                'score': int(score),
+                'date': timezone.now()
+            }
+        )
+
+        # Update score if new score is higher
+        if not created and int(score) > entry.score:
+            entry.score = int(score)
+            entry.date = timezone.now()
+            entry.save()
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Score submitted successfully'
+        })
+
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e)
+        }, status=400)
 
 @login_required(login_url='my-login')
 def leaderboard_view(request):
     update_badges()
-    games = ["Energy Conservation", "Recycling", "Cycling", "Quiz"]
+    games = ["Energy Conservation", "Recycling", "Cycling", "Quiz", "Bike Game"]
     
     leaderboard_data = []
     
