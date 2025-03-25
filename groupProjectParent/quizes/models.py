@@ -12,7 +12,7 @@ class Quiz(models.Model):
         return self.question_set.all()
 
 
-# Model representing a Question in a Quiz
+# Question Model
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     text = models.CharField(max_length=200)
@@ -24,7 +24,7 @@ class Question(models.Model):
         return self.answer_set.all()
 
 
-# Model representing an Answer to a Question
+# Answer Model
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     text = models.CharField(max_length=200)
@@ -32,7 +32,7 @@ class Answer(models.Model):
 
     def __str__(self):
         return f"Q: {self.question.text} | A: {self.text} | Correct: {self.correct}"
-# Model representing the result of a user taking a quiz
+# Result Model
 class Result(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
