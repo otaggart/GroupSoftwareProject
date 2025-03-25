@@ -1,6 +1,11 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'homepage/styles2.css' %}">
 <div class="navbar">
+    <div class="navbar-logo">
+        <a href="http://127.0.0.1:8000/">
+            <img src="/static/image/Logo.jpg" alt="Logo">
+        </a>
+    </div>
     <div class="navbar-links">
         {% url 'home' as home_url %}
         <span>{% if request.path == home_url %}Home{% else %}<a href="{{ home_url }}">Home</a>{% endif %}</span>
