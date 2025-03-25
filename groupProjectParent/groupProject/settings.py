@@ -31,7 +31,7 @@ SESSION_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://bestgroupproject.onrender.com']
 
 LOGIN_URL = 'my-login'
 
