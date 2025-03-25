@@ -1,71 +1,103 @@
-<!DOCTYPE html>
-<html lang="">
-<head>
-    <title>{{ quiz.title }}</title>
-</head>
-<body>
-    <h1>{{ quiz.title }}</h1>
-    <p>This is the quiz page for {{ quiz.title }}.</p>
+{% extends 'base.html' %}
+{% load static %}
 
-    <h2>Questions:</h2>
-    {% if quiz.question_set.all %}
-        <form id="quiz-form">
-            {% for question in quiz.question_set.all %}
-                <div>
-                    <p><strong>{{ question.text }}</strong></p>
-                    {% for answer in question.answer_set.all %}
-                        <label>
-                            <input type="radio" name="question_{{ question.id }}" value="{{ answer.id }}">
-                            {{ answer.text }}
-                        </label><br>
-                    {% endfor %}
-                </div>
-            {% endfor %}
-            <button type="submit">Submit Quiz</button>
-        </form>
-        <p>Time: <span id="timer">0</span> seconds</p>
+{% block title %}Quiz{% endblock %}
+{% block content %}
+    <head>
+        <title>{{ quiz.title }}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'homepage/styles.css' %}">
+        <style>
+            .box-container {
+                border: 2px solid #00a87e;
+                padding: 20px;
+                margin: 20px auto;
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                max-width: 800px;
+                text-align: center;
+            }
+            .box-container h1 {
+                color: #003c3c;
+                text-align: center;
+                padding: 0 !important;
+                background-color: transparent !important;
+            }
+        </style>
+    </head>
+    <body>
+    <div class = "box-container">
+        <h1>{{ quiz.title }}</h1>
+        <p>This is the quiz page for {{ quiz.title }}.</p>
+
+        <h2>Questions:</h2>
+        {% if quiz.question_set.all %}
+            <form id="quiz-form">
+                {% for question in quiz.question_set.all %}
+                    <div>
+                        <p><strong>{{ question.text }}</strong></p>
+                        {% for answer in question.answer_set.all %}
+                            <label>
+                                <input type="radio" name="question_{{ question.id }}" value="{{ answer.id }}">
+                                {{ answer.text }}
+                            </label><br>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <button type="submit" onclick="Switch();setTimeout(toLeaderoard,2000);">Submit Quiz</button>
+            </form>
+            <p>Time: <span id="timer">0</span> seconds</p>
+            <div id = "redirect"></div>
 
 
-        <p id="result"></p>
-    {% else %}
-        <p>No questions available for this quiz.</p>
-    {% endif %}
+            <p id="result"></p>
+        {% else %}
+            <p>No questions available for this quiz.</p>
+        {% endif %}
+    </div>
+        <script>
+            function Switch(){
+                document.getElementById("redirect").innerHTML = "Redirecting to leaderboard...";
+            }
+            function toLeaderoard(){
+                window.location.href = "/leaderboard";
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                let startTime = Date.now();  // Capture the current time when the page is loaded
+                let timerElement = document.getElementById("timer");
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let startTime = Date.now();  // Capture the current time when the page is loaded
-            let timerElement = document.getElementById("timer");
+                //Function to update the timer every second
+                setInterval(function() {
+                    let elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+                    timerElement.innerText = elapsedTime;
+                }, 1000);
 
-    // Function to update the timer every second
-            setInterval(function() {
-                let elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-                timerElement.innerText = elapsedTime;
-            }, 1000);
+                document.getElementById("quiz-form").onsubmit = async function(event) {
+                    event.preventDefault();
 
-            document.getElementById("quiz-form").onsubmit = async function(event) {
-                event.preventDefault();
+                    let elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+                    let answers = {};
+                    document.querySelectorAll("input[type='radio']:checked").forEach(input => {
+                        answers[input.name.replace("question_", "")] = input.value;
+                    });
 
-                let elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-                let answers = {};
-                document.querySelectorAll("input[type='radio']:checked").forEach(input => {
-                    answers[input.name.replace("question_", "")] = input.value;
-                });
+                    const response = await fetch("{% url 'quiz-submit' quiz.id %}", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRFToken": "{{ csrf_token }}"
+                        },
+                        body: JSON.stringify({ answers: answers, time_taken: elapsedTime })
+                    });
 
-                const response = await fetch("{% url 'quiz-submit' quiz.id %}", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRFToken": "{{ csrf_token }}"
-                    },
-                    body: JSON.stringify({ answers: answers, time_taken: elapsedTime })
-                });
+                    const result = await response.json();
+                    document.getElementById("result").innerText =
+                        `Score: ${result.score} / {{ quiz.question_set.count }}, Time Taken: ${result.time_taken} seconds`;
+                };
+            });
 
-                const result = await response.json();
-                document.getElementById("result").innerText =
-                    `Score: ${result.score} / {{ quiz.question_set.count }}, Time Taken: ${result.time_taken} seconds`;
-            };
-        });
+        </script>
+    </body>
+{% endblock %}
 
-    </script>
-</body>
-</html>
+
