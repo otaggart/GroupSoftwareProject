@@ -63,10 +63,10 @@
                 window.location.href = "/leaderboard";
             }
             document.addEventListener("DOMContentLoaded", function() {
-                let startTime = Date.now();  // Capture the current time when the page is loaded
+                let startTime = Date.now();  // Capture current time when4 page is loaded
                 let timerElement = document.getElementById("timer");
 
-                //Function to update the timer every second
+                //Function to update timer every second
                 setInterval(function() {
                     let elapsedTime = Math.floor((Date.now() - startTime) / 1000);
                     timerElement.innerText = elapsedTime;
@@ -99,5 +99,6 @@
         </script>
     </body>
 {% endblock %}
+
 
 
