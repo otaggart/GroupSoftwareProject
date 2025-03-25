@@ -8,8 +8,14 @@ from django.db.models import F
 from leaderboard.models import LeaderboardEntry
 import json
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import user_passes_test
 
-@login_required(login_url='my-login')
+def superuser_required(view_func):
+    decorated_view = user_passes_test(lambda u: u.is_superuser)(view_func)
+    return decorated_view
+
+@superuser_required
 def quiz_list(request):
     quizzes = Quiz.objects.all()
     return render(request, 'quiz_list.html', {'quizzes': quizzes})
@@ -34,16 +40,25 @@ def submit_quiz(request, quiz_id):
         quiz = get_object_or_404(Quiz, id=quiz_id)
         data = json.loads(request.body)
         score = 0
-        time_taken = data.get("time_taken", 0)  # Get time from frontend
+        time_taken = data.get("time_taken", 0)  #Get time from frontend
 
-        for question_id, selected_answer in data.get("answers", {}).items():
+        for question_id, selected_answer_id in data.get("answers", {}).items():
             question = get_object_or_404(Question, id=question_id, quiz=quiz)
-            correct_answer = question.get_answers().filter(correct=True).first()
-            if correct_answer and correct_answer.text == selected_answer:
-                score += 1
+            answers = list(question.get_answers())  #Get all answers
 
-        result = Result.objects.create(user=request.user, quiz=quiz, score=score, time_taken=time_taken)
-        game_name = "Quiz"  # Identifier for the quiz minigame
+            #Find the correct answer object
+            correct_answer = next((ans for ans in answers if ans.correct), None)
+
+            if correct_answer and int(correct_answer.id) == int(selected_answer_id):
+                score += 1
+                print("jesus")
+
+            print(correct_answer.id if correct_answer else None)
+            print(selected_answer_id)
+            print("run")
+
+
+        game_name = "Quiz"
         entry, created = LeaderboardEntry.objects.get_or_create(
             user=request.user,
             game=game_name,
@@ -55,4 +70,3 @@ def submit_quiz(request, quiz_id):
             entry.save()
 
         return JsonResponse({'score': score, 'time_taken': time_taken})  # Return time_taken
-    return HttpResponse(status=405)
