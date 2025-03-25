@@ -63,7 +63,7 @@ def submit_quiz(request, quiz_id):
         entry, created = LeaderboardEntry.objects.get_or_create(
             user=request.user,
             game=game_name,
-            defaults={'score': score, 'date': timezone.now()}
+            defaults={'score': score2, 'date': timezone.now()}
         )
         if not created and score > entry.score:
             entry.score = score
