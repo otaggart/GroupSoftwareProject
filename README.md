@@ -41,6 +41,7 @@ Within process documents we have also included the meeting notes, agenda and min
 
 https://docs.google.com/document/d/1V9aqwANRkeQJ3JtRS3k_rFP_eUM8QaQCVFfUZ8iU3Bc/edit?tab=t.0#heading=h.jm2pi5r4x4x8  
 
+**INSTRUCTIONS FOR USE**
 
 TECHNICAL DOCUMENTS   
 Our technical documents are primarily managed on the github system. The link to the project is below:  
