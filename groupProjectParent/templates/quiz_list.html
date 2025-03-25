@@ -1,19 +1,20 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-  <h1>Available Quizzes</h1>
-  <ul>
-    {% for quiz in quizzes %}
-      <li>
-        <a href="{% url 'quiz-detail' quiz.id %}">{{ quiz.title }}</a>
-      </li>
-    {% empty %}
-      <p>No quizzes available.</p>
-    {% endfor %}
-  </ul>
-</body>
-</html>
+{% block content %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+      <h1>Available Quizzes</h1>
+      <ul>
+        {% for quiz in quizzes %}
+          <li>
+            <a href="{% url 'quiz-detail' quiz.id %}">{{ quiz.title }}</a>
+          </li>
+        {% empty %}
+          <p>No quizzes available.</p>
+        {% endfor %}
+      </ul>
+    </body>
+{% endblock %}
