@@ -11,6 +11,7 @@ pip install django
 pip install qrcode  
 pip install pillow 
 pip install django-extensions
+pip install whitenoise
 commands -  
 python manage.py makemigrations  
 python manage.py migrate  
