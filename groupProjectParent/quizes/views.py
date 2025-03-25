@@ -59,6 +59,7 @@ def submit_quiz(request, quiz_id):
 
 
         game_name = "Quiz"
+        score2 = score*(150-time_taken)
         entry, created = LeaderboardEntry.objects.get_or_create(
             user=request.user,
             game=game_name,
