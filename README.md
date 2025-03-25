@@ -56,7 +56,7 @@ quiz creation ~ to create a quiz minigame, first add a quiz. Once a quiz is adde
 qr code linking ~ admins can generate qr codes by enetering the website database section, to generate a qr code, click add then paste a url into the Name field and save. a file can be used to replace the generated qr code if needed.
 
 Regular Users:
-should access minigames via qr codes
+should access minigames via qr codes (can be found in our development documentation)
 can navigate the rest of the website via the nav bar
 
 **TECHNICAL DOCUMENTS**   
