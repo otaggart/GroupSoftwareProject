@@ -28,5 +28,5 @@ def update_badges():
                 if profile.user == best_game.user:
                     profile.badges.add(badge_game)
                 else:
-                    if badge_overall in profile.badges.all():
+                    if badge_game in profile.badges.all():
                         profile.badges.remove(badge_game)
