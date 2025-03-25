@@ -1,11 +1,11 @@
 # bestGroupProject
 urls -   
-localhost:8000/  
-localhost:8000/EnergyConservationMinigame  
-localhost:8000/Recycle  
-localhost:8000/bike_game  
-localhost:8000/list  
-localhost:8000/admin  
+http://127.0.0.1:8000)    
+http://127.0.0.1:8000/EnergyConservationMinigame  
+http://127.0.0.1:8000/Recycle  
+http://127.0.0.1:8000/bike_game  
+http://127.0.0.1:8000/list  
+http://127.0.0.1:8000/admin  
 installations-  
 pip install qrcode  
 pip install pillow     
