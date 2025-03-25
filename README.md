@@ -1,6 +1,6 @@
 # bestGroupProject
 urls -   
-http://127.0.0.1:8000)    
+http://127.0.0.1:8000    
 http://127.0.0.1:8000/EnergyConservationMinigame  
 http://127.0.0.1:8000/Recycle  
 http://127.0.0.1:8000/bike_game  
