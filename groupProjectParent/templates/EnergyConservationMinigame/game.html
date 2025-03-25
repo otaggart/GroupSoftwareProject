@@ -56,7 +56,7 @@
         <img src="{% static 'EnergyConservationMinigame/dorm_room.jpg' %}" alt="Dorm Room" usemap="#deviceMap" class="dorm-room">
 
         {% for device, status in game.devices.items %}
-        {% with base="EnergyConservationMinigame/"|add:device|lower|add:"_" %}
+        {% with base="EnergyConservationMinigame/"|add:device|add:"_" %}
         {% with state=status|yesno:"on,off" %}
         {% with image=base|add:state|add:".png" %}
         <img src="{% static image %}" alt="{{ device }}" class="device-overlay" data-device="{{ device }}">
