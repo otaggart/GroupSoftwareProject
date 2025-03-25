@@ -14,9 +14,6 @@ python manage.py makemigrations
 python manage.py migrate  
 python manage.py createsuperuser  
 python manage.py runserver  
-Welcome to the Exeter Orienteering Project
-Group Z
-___
 
 The group members are:  
   
