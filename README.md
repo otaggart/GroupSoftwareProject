@@ -44,6 +44,8 @@ Within process documents we have also included the meeting notes, agenda and min
 https://docs.google.com/document/d/1V9aqwANRkeQJ3JtRS3k_rFP_eUM8QaQCVFfUZ8iU3Bc/edit?tab=t.0#heading=h.jm2pi5r4x4x8  
 
 **INSTRUCTIONS FOR USE**
+to run the deployed version use the following link - https://bestgroupproject.onrender.com/
+
 to host locally the above installs are required
 
 Adminastrative and Game Management Uses:
@@ -61,10 +63,3 @@ can navigate the rest of the website via the nav bar
 Our technical documents are primarily managed on the github system. The link to the project is below:  
 
 github link: https://github.com/aSaunEXCS/bestGroupProject  
-
-Technical documents are broken down into front end and back end etc.  
-  
-**PRODUCT DOCUMENTS**  
-Our product documents are primarily in the form of a product UI. Below is a link to our latest version.  
- 
-public link: [https://ibm/cloud/12i7dvgj/exeter-orienteering]  
