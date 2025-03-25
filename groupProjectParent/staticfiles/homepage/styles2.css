@@ -1,0 +1,137 @@
+.navbar {
+    background-color: #00a87e;
+    overflow: hidden;
+    height: 60px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 0 20px;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo img {
+    height: 65px; /* Adjust the logo size */
+    width: 65px;
+    cursor: pointer;
+}
+
+
+.navbar-links {
+    display: flex;
+    gap: 10px; 
+}
+
+    .navbar-links a {
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+        .navbar-links a:hover {
+            background-color: #00c896;
+            color: #003c3c;
+        }
+
+.navbar-profile {
+}
+
+.profile-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.dashboard-header {
+    grid-column: 1 / span 3; 
+    text-align: left;
+    color: white;
+    margin-bottom: 10px;
+}
+h1{
+    color:white;
+    text-align: center;
+    background-color: #00a87e;
+    padding: 20px 0;
+}
+.other h1{
+    color: #003c3c;
+    text-align: center ;
+    /* Reset any other properties you want to control */
+    padding: 0 !important;
+    background-color: transparent !important;
+}
+
+.dashboard-container {
+    margin-top: 70px;
+    background-color: #003c3c;
+    border-radius: 20px;
+    padding: 20px;
+    width: 90vw;
+    max-width: 800px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 20px;
+    color: #000;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gauge {
+    border-radius: 50%;
+    background: conic-gradient(#00c896 calc(var(--percent, 0) * 1%), #022020 0);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color:#ffff;
+}
+
+    .gauge span {
+        position: absolute;
+        z-index: 2;
+    }
+
+    .gauge.minigame {
+        width: 80px;
+        height: 80px;
+        font-size: 0.9rem;
+    }
+
+    .gauge.overall {
+        grid-column: 3;
+        grid-row: 2;
+        width: 150px;
+        height: 150px;
+        font-size: 1.2rem;
+    }
+
+    .gauge.energy {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .gauge.cycling {
+        grid-column: 2;
+        grid-row: 3;
+    }
+
+    .gauge.recycling {
+        grid-column: 4;
+        grid-row: 3;
+    }
+
+    .gauge.quiz {
+        grid-column: 5;
+        grid-row: 3;
+    }

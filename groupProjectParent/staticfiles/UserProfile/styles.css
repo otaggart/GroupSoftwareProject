@@ -1,0 +1,79 @@
+.box-container {
+    border: 2px solid #00a87e;
+    padding: 20px;
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    text-align: center;
+}
+body {
+    background-image: url("R(1).jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+h1{
+    color:white;
+    text-align: center;
+    background-color: #00a87e;
+    padding: 20px 0;
+}
+h2{
+    color:#003c3c;
+    text-align: center;
+}
+button[type="submit"] {
+    background-color: #00a87e;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+button[type="submit"]:hover {
+    background-color: #008c69;
+}
+button[type="submit"] {
+    background-color: #00a87e;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+button[type=""]:hover {
+    background-color: #008c69;
+}
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #003c3c;
+}
+
+form input[type="text"],
+form input[type="email"],
+form textarea {
+    width: 50%;
+    padding: 10px;
+    border: 2px solid #008c69;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 16px;
+}
+
+form input[type="file"] {
+    margin: 10px 0;
+}
